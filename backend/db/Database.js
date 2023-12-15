@@ -1,5 +1,4 @@
-const mongoose=require('mongoose');
-
+import mongoose from 'mongoose';
 
 const connectDatabase=()=>{
     mongoose.connect(process.env.MONGODB_URL);
@@ -9,4 +8,4 @@ const connectDatabase=()=>{
     db.once('open',()=>{console.log("Connected to the database");})
 }
 
-module.exports=connectDatabase;
+export default connectDatabase;
