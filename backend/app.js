@@ -1,7 +1,8 @@
 const express=require("express");
+const connectDatabase = require("./db/Database");
 const app=express();
 
-require("dotenv").config("./config/.env")
+require("dotenv").config({path:"config/.env"});
 
 
 process.on('uncaughtException',(error)=>{
@@ -13,11 +14,13 @@ process.on('unhandledRejection',(error)=>{
     process.exit(1);
 })
 
+connectDatabase();
+
 app.get("/",(req,res)=>{
     res.send("Hello Developers");
 })
 
 app.listen(process.env.PORT,()=>{
-    console.log(`server is running at http://localhost:8000`);
+    console.log(`server is running at http://localhost:${process.env.PORT}`);
 })
 
