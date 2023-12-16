@@ -2,9 +2,10 @@ import express from "express";
 const router = express.Router();
 import User from "../models/user.js";
 import cloudinary from "cloudinary";
-import { jwt } from "jsonwebtoken";
+import  jwt  from "jsonwebtoken";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import catchAsyncErrors from "../middleware/catchAsyncError.js";
+import sendMail from "../utils/sendMail.js";
 
 //Create user
 
@@ -38,7 +39,7 @@ router.post("/create-user", async (req, res, next) => {
     try {
       await sendMail({
         email: user.email,
-        subject: "Activate your account",
+        subject: "ApnaShop account Activation",
         message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
       });
       res.status(201).json({
