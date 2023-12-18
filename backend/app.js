@@ -3,15 +3,17 @@ const app = express();
 import ErrorHandler from "./middleware/error.js";
 import connectDatabase from "./db/Database.js";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import cloudinary from "cloudinary";
 
-app.use(cors({ origin: ["https://localhost:3000"], credentials: true }));
+// app.use(cors({ origin: ["https://localhost:3000"], credentials: true }));
+app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 dotenv.config({ path: "config/.env" });
 
@@ -40,8 +42,10 @@ app.listen(process.env.PORT, () => {
 });
 
 //Import routes
-import user from "./controller/user.js";
+import userRouter from "./controller/user.js";
 
-app.use("/api/v2/user", user);
+app.use("/api/v2/user", userRouter);
+
+
 
 app.use(ErrorHandler);
