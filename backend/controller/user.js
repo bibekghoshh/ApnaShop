@@ -6,6 +6,7 @@ import  jwt  from "jsonwebtoken";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import catchAsyncErrors from "../middleware/catchAsyncError.js";
 import sendMail from "../utils/sendMail.js";
+import sendToken from "../utils/jwtToken.js";
 
 //Create user
 
@@ -14,11 +15,11 @@ router.post("/create-user", async (req, res, next) => {
     const { name, email, password, avatar } = req.body;
     const userEmail = await User.findOne({ email });
 
-    if (userEmail) {
+    if (userEmail) { 
       return next(new ErrorHandler("User already exists", 400));
     }
 
-    const myCould = await cloudinary.v2.uploader.upload(avatar, {
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
       folder: "avatars",
     });
 
@@ -27,14 +28,14 @@ router.post("/create-user", async (req, res, next) => {
       email: email,
       password: password,
       avatar: {
-        public_id: myCould.public_id,
-        url: myCould.secure_url,
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
       },
     };
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `https://localhost:8000/activation/${activationToken}`;
+    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -99,4 +100,4 @@ router.post(
   })
 );
 
-module.exports= router;
+export default router;
