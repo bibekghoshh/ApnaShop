@@ -1,51 +1,32 @@
-import express from "express";
+const express = require("express");
+const ErrorHandler = require("./middleware/error");
 const app = express();
-import ErrorHandler from "./middleware/error.js";
-import connectDatabase from "./db/Database.js";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-import cors from "cors";
-import dotenv from "dotenv";
-import cloudinary from "cloudinary";
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-// app.use(cors({ origin: ["https://localhost:3000"], credentials: true }));
 app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/test", (req, res) => {
+  res.send("Hello world!");
+});
+
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
-dotenv.config({ path: "config/.env" });
+// config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({
+    path: "config/.env",
+  });
+}
 
-process.on("uncaughtException", (error) => {
-  console.error("Uncaught Exception:", error);
-  process.exit(1);
-});
-process.on("unhandledRejection", (error) => {
-  console.error("Unhandled Rejection:", error);
-  process.exit(1);
-});
+// import routes
+const user = require("./controller/user");
 
-connectDatabase();
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello Developers");
-});
-app.listen(process.env.PORT, () => {
-  console.log(`server is running at http://localhost:${process.env.PORT}`);
-});
-
-//Import routes
-import userRouter from "./controller/user.js";
-
-app.use("/api/v2/user", userRouter);
-
-
+app.use("/api/v2/user", user);
 
 app.use(ErrorHandler);
+
+module.exports = app;

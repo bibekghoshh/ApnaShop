@@ -8,12 +8,12 @@ import { toast } from "react-toastify";
 
 
 const SignUp = () => {
-  const [Name, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [visible, setVisible] = useState(false);
-  const navigate=useNavigate();
+  // const navigate=useNavigate();
 
   const handleFileInput = (e) => {
     const file=e.target.files[0];
@@ -50,11 +50,11 @@ const SignUp = () => {
     }
 
     axios
-      .post(`${server}/user/create-user`, { Name, email, password, avatar }) 
+      .post(`${server}/user/create-user`, { name, email, password, avatar }) 
       .then((res) => {
         toast.success(res.data.message);
         if(res.data.success===true){
-          navigate("/login");
+          // navigate("/login");
         }
         setName("");
         setEmail("");
@@ -83,7 +83,7 @@ const SignUp = () => {
             type="text"
             name="text"
             id="fullname"
-            value={Name}
+            value={name}
             onChange={(e) => setName(e.target.value)}
             className="px-2 py-2 border-2 border-gray-300 rounded-md outline-none focus:border-blue-500 placeholder:text-sm"
             autoComplete="name"
