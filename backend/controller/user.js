@@ -5,9 +5,9 @@ const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncError = require("../middleware/catchAsyncError.js");
 const sendToken = require("../utils/jwtToken.js");
+const { isAuthenticated } = require("../middleware/auth.js");
 
 //Create user
-
 router.post("/create-user", async (req, res, next) => {
   try {
     const { name, email, password, avatar } = req.body;
@@ -43,6 +43,7 @@ router.post("/create-user", async (req, res, next) => {
   }
 });
 
+//LOGIN USER
 router.post(
   "/login-user",
   catchAsyncError(async (req, res, next) => {
@@ -71,5 +72,21 @@ router.post(
     }
   })
 );
+
+//Load user
+router.get("/getuser",isAuthenticated,catchAsyncError(async(req,res,next)=>{
+  try {
+    const user=await User.findById(req.user.id);
+
+    if(!user){
+      return next(new ErrorHandler("User doesn't exists !",400))
+    }
+
+    res.status(200).json({success:true,user})
+
+  } catch (error) {
+    return next(new ErrorHandler(error.messase,500))
+  }
+}))
 
 module.exports = router;
