@@ -13,7 +13,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
   const [visible, setVisible] = useState(false);
-  // const navigate=useNavigate();
+  const navigate=useNavigate();
 
   const handleFileInput = (e) => {
     const file=e.target.files[0];
@@ -54,7 +54,8 @@ const SignUp = () => {
       .then((res) => {
         toast.success(res.data.message);
         if(res.data.success===true){
-          // navigate("/login");
+          toast.success("Account has been created successfully");
+          navigate("/login");
         }
         setName("");
         setEmail("");
