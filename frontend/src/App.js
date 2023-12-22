@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login, SignUp } from "./routes/Routes";
+import { Login, SignUp,HomePage } from "./routes/Routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Store from "./redux/store";
-import { loaduser } from "./redux/actions/user";
+import { loadUser } from "./redux/actions/user";
 
 function App() {
 
   useEffect(()=>{
-    Store.dispatch(loaduser());
+    Store.dispatch(loadUser());
   })
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<HomePage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
