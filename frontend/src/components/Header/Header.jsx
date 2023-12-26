@@ -82,7 +82,7 @@ const Header = () => {
           {/* Categoriesss */}
           <div>
             <button
-              className="relative flex items-center gap-3 px-4 py-4 mt-2 text-lg font-medium bg-white rounded-t-lg"
+              className="relative flex items-center px-4 py-4 mt-1 text-lg font-medium bg-white rounded-t-lg gap-7"
               onClick={() => setDropDown(!dropDown)}
             >
               <CiMenuFries />
