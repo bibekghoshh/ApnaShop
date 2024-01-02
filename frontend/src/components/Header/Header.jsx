@@ -10,7 +10,7 @@ import NavBar from "./NavBar";
 import { BsCart2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 
-const Header = () => {
+const Header = ({activeHeading}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [dropDown, setDropDown] = useState(false);
@@ -98,7 +98,7 @@ const Header = () => {
           </div>
           {/* Navitemss */}
           <div className="flex items-center">
-            <NavBar activeHeading={1} />
+            <NavBar active={activeHeading}/>
           </div>
           {/* User Informationn */}
           <div className="flex items-center gap-3 text-white">

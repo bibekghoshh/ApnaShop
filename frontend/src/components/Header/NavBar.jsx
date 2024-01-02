@@ -8,7 +8,7 @@ const NavBar = ({active}) => {
       {navItems &&
         navItems.map((item,index) => (
           <div key={index}>
-            <Link to={item.url} className="">{item.title}</Link>
+            <Link to={item.url} className={`${active===index+1?"text-black":null} font-medium`}>{item.title}</Link>
           </div>
         ))}
     </div>

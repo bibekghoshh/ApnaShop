@@ -10,7 +10,7 @@ const DropDown = ({ categoriesData, setDropDown }) => {
         window.location.reload();
     }
   return (
-    <div className="absolute flex flex-col gap-2 py-2 pl-2 text-sm bg-white w-[237px] rounded-b-md drop-shadow-lg">
+    <div className="absolute flex flex-col gap-2 py-2 pl-2 text-sm bg-white w-[237px] rounded-b-md drop-shadow-lg z-50">
       {categoriesData &&
         categoriesData.map((data, index) => (
           <div key={index} className="flex items-center gap-1 cursor-pointer" onClick={()=>submitHandle(data)}>

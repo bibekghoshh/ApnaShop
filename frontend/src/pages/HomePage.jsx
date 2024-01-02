@@ -11,7 +11,7 @@ import FeaturedProduct from '../components/ProductCard/FeaturedProduct';
 const HomePage = () => {
   return (
     <div>
-        <Header/>
+        <Header activeHeading={1}/>
         <Hero/>
         <Categories/>
         <BestDeals/>

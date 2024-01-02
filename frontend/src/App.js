@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
+import ProductsPage from "./pages/ProductsPage";
 
 function App() {
 
@@ -18,6 +19,11 @@ function App() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+
+        <Route path="/products" element={<ProductsPage/>}/>
+
+        <Route path="/best-selling" element={}/>
+
       </Routes>
       <ToastContainer
         position="bottom-center"
