@@ -6,6 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 import ProductsPage from "./pages/ProductsPage";
+import BestSellingPage from "./pages/BestSellingPage";
+import EventsPage from "./pages/EventsPage";
+import FAQPage from "./pages/FAQPage";
 
 function App() {
 
@@ -22,7 +25,9 @@ function App() {
 
         <Route path="/products" element={<ProductsPage/>}/>
 
-        <Route path="/best-selling" element={}/>
+        <Route path="/best-selling" element={<BestSellingPage/>}/>
+        <Route path="/events" element={<EventsPage/>}/>
+        <Route path="/faq" element={<FAQPage/>}/>
 
       </Routes>
       <ToastContainer
