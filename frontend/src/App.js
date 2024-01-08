@@ -9,6 +9,7 @@ import ProductsPage from "./pages/ProductsPage";
 import BestSellingPage from "./pages/BestSellingPage";
 import EventsPage from "./pages/EventsPage";
 import FAQPage from "./pages/FAQPage";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
         <Route path="/best-selling" element={<BestSellingPage/>}/>
         <Route path="/events" element={<EventsPage/>}/>
         <Route path="/faq" element={<FAQPage/>}/>
+
+        <Route path="/checkout" element={<Checkout/>}/>
 
       </Routes>
       <ToastContainer
